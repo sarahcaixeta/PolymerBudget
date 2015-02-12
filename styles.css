@@ -35,6 +35,9 @@ core-overlay-layer {
 .hidden{
    visibility: hidden;
 }
-.visible{
+.errorLabel{
    visibility: visible;
+   font-size: 0.6em;
+   color: #ff0000;
+   vertical-align: bottom;
 }

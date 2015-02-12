@@ -17,17 +17,16 @@
         <core-item>
           <paper-input label="Budget" floatingLabel></paper-input>
         </core-item>
-        <core-item>
-          <label flex>From</label>
+        <core-item vertical>
           <paper-date-picker-dialog id="initialDate" value="{{from}}" infiniteScrolling="false"></paper-date-picker-dialog>
-          <paper-button on-click="{{openInitialDatePicker}}" >{{formatDate(from)}}</paper-button>
+          <paper-button on-click="{{openInitialDatePicker}}" >From {{formatDate(from)}}</paper-button>
+          <label id="initialDateValidation" class='hidden'>The initial date should be before final date.</label>
         </core-item>
-        <core-item>
-          <label flex>To</label>
+        <core-item vertical>
           <paper-date-picker-dialog id="finalDate" value="{{to}}" infiniteScrolling="false"></paper-date-picker-dialog>
-          <paper-button on-click="{{openFinalDatePicker}}" >{{formatDate(to)}}</paper-button>
+          <paper-button on-click="{{openFinalDatePicker}}" >To {{formatDate(to)}}</paper-button>
+          <label id="finalDateValidation" class='hidden'>The final date should be after initial date.</label>
         </core-item>
-        <label id="datesValidationLabel" class='hidden'>The first date should be before the second.</label>
       </core-header-panel>
 
       <core-header-panel main>
@@ -58,16 +57,16 @@
       },
       fromChanged: function() {
         if (moment(this.to) < moment(this.from)){
-          this.$.datesValidationLabel.className = 'visible';
+          this.$.initialDateValidation.className = 'errorLabel';
         } else {
-          this.$.datesValidationLabel.className = 'hidden';
+          this.$.initialDateValidation.className = 'hidden';
         }
       },
       toChanged: function() {
         if (moment(this.to) < moment(this.from)){
-          this.$.datesValidationLabel.className = 'visible';
+          this.$.finalDateValidation.className = 'errorLabel';
         } else {
-          this.$.datesValidationLabel.className = 'hidden';
+          this.$.finalDateValidation.className = 'hidden';
         }
       }
     });
