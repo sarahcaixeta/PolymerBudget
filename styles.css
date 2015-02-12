@@ -1,0 +1,40 @@
+:host {
+  font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+}
+[drawer] {
+   background-color: #fff;
+}
+
+[main] > div {
+  padding: 2em;
+}
+
+[drawer] > core-item {
+  padding: 1em;
+}
+[main] {
+  height: 100%;
+  background-color: #f1f1f3;
+}
+
+[drawer] core-toolbar {
+  background-color: #66aa55;
+  color: #fff;
+}
+
+[main] core-toolbar {
+  background-color: #77cc55;
+  color: #fff;
+}
+paper-input {
+  width: 95%;
+}
+core-overlay-layer {
+  font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+}
+.hidden{
+   visibility: hidden;
+}
+.visible{
+   visibility: visible;
+}

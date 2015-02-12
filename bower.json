@@ -1,0 +1,16 @@
+{
+  "name": "PolymerApp",
+  "description": "",
+  "homepage": "",
+  "keywords": [
+  ],
+  "author": "",
+  "private": true,
+  "dependencies": {
+    "polymer": "Polymer/polymer#master",
+    "paper-elements": "Polymer/paper-elements#master",
+    "core-elements": "Polymer/core-elements#master",
+    "font-roboto": "Polymer/font-roboto#master",
+    "moment": "~2.9.0"
+  }
+}
