@@ -15,7 +15,10 @@
       <core-header-panel drawer>
         <core-toolbar>Menu</core-toolbar>
         <core-item>
-          <paper-input label="Budget" floatingLabel></paper-input>
+          <paper-input label="Budget"
+          value="{{budget}}"
+          on-change="{{calculate}}"
+          floatingLabel></paper-input>
         </core-item>
         <core-item vertical>
           <paper-date-picker-dialog id="initialDate" value="{{from}}" infiniteScrolling="false"></paper-date-picker-dialog>
@@ -32,6 +35,9 @@
         <core-toolbar>
           <paper-icon-button icon="menu" on-click="{{toggleDrawer}}"></paper-icon-button>
           <span flex>Budgets</span>
+
+          <div>${{dailyBudget}} per day</div>
+
         </core-toolbar>
       </core-header-panel>
 
@@ -40,6 +46,7 @@
   </template>
   <script>
     Polymer('app-a', {
+      dailyBudget: 0.0,
       from: new Date(),
       to: moment().add(7, 'days').toDate(),
       toggleDrawer: function() {
@@ -56,10 +63,18 @@
       },
       fromChanged: function() {
         this.$.dateValidation.className = classAccordingToValidation(this.from, this.to);
+        this.calculate();
       },
       toChanged: function() {
        this.$.dateValidation.className = classAccordingToValidation(this.from, this.to);
+       this.calculate();
+      },
+      calculate: function() {
+        if (this.$.dateValidation.className == 'hidden'){
+          this.dailyBudget = calculateBudget(this.from, this.to, this.budget);
+        }
       }
+
     });
   </script>
 </polymer-element>

@@ -4,4 +4,16 @@ classAccordingToValidation = function(from, to) {
   } else {
     return 'hidden';
   }
+},
+calculateBudget = function(from, to, amount){
+  var today = moment();
+  var initialDay = moment(from);
+  var finalDay = moment(to);
+  var diffDays = 1;
+  if (today < initialDay || today > finalDay){
+    diffDays = finalDay.diff(initialDay, 'days');
+  } else {
+    diffDays = finalDay.diff(today, 'days');
+  }
+  return (amount / diffDays).toFixed(2);
 }
