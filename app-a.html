@@ -20,13 +20,12 @@
         <core-item vertical>
           <paper-date-picker-dialog id="initialDate" value="{{from}}" infiniteScrolling="false"></paper-date-picker-dialog>
           <paper-button on-click="{{openInitialDatePicker}}" >From {{formatDate(from)}}</paper-button>
-          <label id="initialDateValidation" class='hidden'>The initial date should be before final date.</label>
         </core-item>
         <core-item vertical>
           <paper-date-picker-dialog id="finalDate" value="{{to}}" infiniteScrolling="false"></paper-date-picker-dialog>
           <paper-button on-click="{{openFinalDatePicker}}" >To {{formatDate(to)}}</paper-button>
-          <label id="finalDateValidation" class='hidden'>The final date should be after initial date.</label>
         </core-item>
+          <label id="dateValidation" class='hidden'>The initial date should be before final date.</label>
       </core-header-panel>
 
       <core-header-panel main>
@@ -56,18 +55,10 @@
         return date.toDateString();
       },
       fromChanged: function() {
-        if (moment(this.to) < moment(this.from)){
-          this.$.initialDateValidation.className = 'errorLabel';
-        } else {
-          this.$.initialDateValidation.className = 'hidden';
-        }
+        this.$.dateValidation.className = classAccordingToValidation(this.from, this.to);
       },
       toChanged: function() {
-        if (moment(this.to) < moment(this.from)){
-          this.$.finalDateValidation.className = 'errorLabel';
-        } else {
-          this.$.finalDateValidation.className = 'hidden';
-        }
+       this.$.dateValidation.className = classAccordingToValidation(this.from, this.to);
       }
     });
   </script>
