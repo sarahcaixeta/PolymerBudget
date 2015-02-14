@@ -1,0 +1,25 @@
+{
+  "name": "PolymerApp",
+  "version": "0.0.0",
+  "description": "",
+  "main": "main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sarahcaixeta/PolymerBudget.git"
+  },
+  "author": "Sarah Caixeta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sarahcaixeta/PolymerBudget/issues"
+  },
+  "homepage": "https://github.com/sarahcaixeta/PolymerBudget",
+  "devDependencies": {
+    "moment": "^2.9.0"
+  }
+}

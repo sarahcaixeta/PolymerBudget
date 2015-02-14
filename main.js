@@ -4,7 +4,8 @@ classAccordingToValidation = function(from, to) {
   } else {
     return 'hidden';
   }
-},
+};
+
 calculateBudget = function(from, to, amount, expenses){
   var today = moment();
   var initialDay = moment(from);
@@ -17,11 +18,12 @@ calculateBudget = function(from, to, amount, expenses){
   }
   var realbudget = amount - sumOfExpenses(expenses);
   return (realbudget / diffDays).toFixed(2);
-},
+};
+
 sumOfExpenses = function(expenses) {
   var total = 0;
   for (var i = 0; i < expenses.length; i++){
     total += Number(expenses[i].price);
   }
   return total;
-}
+};
