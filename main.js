@@ -16,4 +16,12 @@ calculateBudget = function(from, to, amount){
     diffDays = finalDay.diff(today, 'days');
   }
   return (amount / diffDays).toFixed(2);
+},
+sumOfExpenses = function(expenses) {
+  var total = 0;
+  for (var i = 0; i < expenses.length; i++){
+    total += Number(expenses[i].price);
+  }
+  console.log(total);
+  return total;
 }

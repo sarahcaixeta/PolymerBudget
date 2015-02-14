@@ -100,7 +100,8 @@
       },
       calculate: function() {
         if (this.$.dateValidation.className == 'hidden'){
-          this.dailyBudget = calculateBudget(this.from, this.to, this.budget);
+          var realbudget = this.budget - sumOfExpenses(this.expenses);
+          this.dailyBudget = calculateBudget(this.from, this.to, realbudget);
         }
       },
       addExpense: function() {
@@ -111,6 +112,7 @@
         });
         this.name = "";
         this.value = "";
+        this.calculate();
       },
 
     });
