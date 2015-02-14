@@ -32,12 +32,15 @@ paper-input {
 core-overlay-layer {
   font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
 }
-.hidden{
+.hidden {
    visibility: hidden;
 }
-.errorLabel{
+.errorLabel {
    visibility: visible;
    font-size: 0.6em;
    color: #ff0000;
    vertical-align: bottom;
+}
+.smallFont {
+  font-size: 0.6em;
 }
