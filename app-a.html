@@ -5,6 +5,8 @@
 <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="bower_components/paper-input/paper-input.html">
 <link rel="import" href="bower_components/paper-date-picker/paper-date-picker-dialog.html">
+<link rel="import" href="bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="bower_components/paper-shadow/paper-shadow.html">
 
 <polymer-element name="app-a">
   <template>
@@ -38,8 +40,19 @@
           <div>${{dailyBudget}} <spam class="smallFont">per day</spam></div>
         </core-toolbar>
 
-
-
+        <div>
+        <template repeat="{{expenses}}">
+          <paper-shadow z="1">
+            <div class="expense" flex horizontal center layout>
+              <div flex vertical layout>
+                <div id="expense-name">{{name}}</div>
+                <div id="expense-timestamp">{{timestamp}}</div>
+              </div>
+              <div id="expense-price">${{price}}</div>
+            </div>
+          </paper-shadow>
+        </template>
+        </div>
       </core-header-panel>
 
     </core-drawer-panel>
@@ -50,6 +63,7 @@
       dailyBudget: 0.0,
       from: new Date(),
       to: moment().add(7, 'days').toDate(),
+      expenses: [{name: "food", price: "30.5", timestamp: moment().format("DD MMM YYYY h:mm")}],
       toggleDrawer: function() {
         this.$.drawerPanel.togglePanel();
       },

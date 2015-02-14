@@ -44,3 +44,17 @@ core-overlay-layer {
 .smallFont {
   font-size: 0.6em;
 }
+.expense {
+  background-color: #ffffff;
+  padding: 1em;
+}
+#expense-timestamp {
+  font-size: 0.8em;
+  color: #848484;
+}
+#expense-price {
+  font-size: 1.1em;
+}
+#expense-name {
+  font-weight: bold;
+}
