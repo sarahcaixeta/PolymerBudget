@@ -47,6 +47,7 @@ core-overlay-layer {
 .expense {
   background-color: #ffffff;
   padding: 1em;
+  margin-bottom: 1em;
 }
 #expense-timestamp {
   font-size: 0.8em;
@@ -57,4 +58,11 @@ core-overlay-layer {
 }
 #expense-name {
   font-weight: bold;
+}
+paper-fab {
+  background-color: #F56710;
+  bottom: 1em;
+  position: absolute !important;
+  right: 1em;
+  z-index: 10;
 }
