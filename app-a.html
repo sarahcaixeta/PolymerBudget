@@ -28,10 +28,10 @@
           <label>From</label>
           <paper-button on-click="{{openInitialDatePicker}}" >{{formatDate(from)}}</paper-button>
         </core-item>
+        <core-item>
           <paper-date-picker-dialog id="finalDate" value="{{to}}" infiniteScrolling="false"></paper-date-picker-dialog>
           <label>To</label>
           <paper-button on-click="{{openFinalDatePicker}}" >{{formatDate(to)}}</paper-button>
-        <core-item>
         </core-item>
           <label id="dateValidation" class='hidden'>The initial date should be before final date.</label>
       </core-header-panel>
