@@ -57,10 +57,14 @@
           </template>
         </div>
 
-        <paper-action-dialog id="newExpenseDialog" transition="paper-dialog-transition-bottom">
+        <paper-action-dialog id="newExpenseDialog">
           <div>
-            <paper-input label="Expense name" value="{{name}}" floatingLabel></paper-input>
-            <paper-input label="Value" value="{{value}}" floatingLabel></paper-input>
+            <label>Name</label>
+            <paper-input label="Food, drinks" value="{{name}}"></paper-input>
+          </div>
+          <div>
+            <label>Amount</label>
+            <paper-input label="10.00" value="{{value}}"></paper-input>
           </div>
           <paper-button dismissive>Cancel</paper-button>
           <paper-button affirmative on-click="{{addExpense}}">Add</paper-button>
