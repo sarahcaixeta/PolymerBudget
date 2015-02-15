@@ -1,36 +1,39 @@
 :host {
   font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
 }
+core-overlay-layer {
+  font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+}
 [drawer] {
    background-color: #fff;
 }
-
-[main] > div {
-  padding: 2em;
+[drawer] core-toolbar {
+  background-color: #66aa55;
+  color: #fff;
 }
-
 [drawer] > core-item {
   padding: 1em;
+}
+core-item.paper-input {
+  width: 95%;
+}
+[main] > div {
+  padding: 2em;
 }
 [main] {
   height: 100%;
   background-color: #f1f1f3;
 }
-
-[drawer] core-toolbar {
-  background-color: #66aa55;
-  color: #fff;
-}
-
 [main] core-toolbar {
   background-color: #77cc55;
   color: #fff;
 }
-paper-input {
-  width: 95%;
-}
-core-overlay-layer {
-  font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+paper-fab {
+  background-color: #F56710;
+  bottom: 1em;
+  position: absolute !important;
+  right: 1em;
+  z-index: 10;
 }
 .hidden {
    visibility: hidden;
@@ -58,11 +61,4 @@ core-overlay-layer {
 }
 #expense-name {
   font-weight: bold;
-}
-paper-fab {
-  background-color: #F56710;
-  bottom: 1em;
-  position: absolute !important;
-  right: 1em;
-  z-index: 10;
 }
