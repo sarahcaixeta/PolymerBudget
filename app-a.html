@@ -86,7 +86,7 @@
       from: new Date(),
       to: moment().add(7, 'days').toDate(),
       newExpenseDate: new Date(),
-      expenses: [{name: "food", price: "30.5", timestamp: moment().format("DD MMM YYYY h:mm")}],
+      expenses: [{name: "food", price: "30.5", timestamp: moment().format("MMM DD YYYY")}],
       toggleDrawer: function() {
         this.$.drawerPanel.togglePanel();
       },
@@ -100,7 +100,6 @@
         this.$.expenseDate.open();
       },
       newExpense: function() {
-        this.newExpenseDate = new Date();
         this.$.newExpenseDialog.toggle();
       },
       formatDate: function(date) {
@@ -127,8 +126,9 @@
         });
         this.name = "";
         this.value = "";
+        this.newExpenseDate = new Date();
         this.dailyBudget = calculateBudget(this.from, this.to, this.budget, this.expenses);
-      },
+      }
 
     });
   </script>
