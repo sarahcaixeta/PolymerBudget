@@ -66,6 +66,11 @@
             <label>Amount</label>
             <paper-input label="10.00" value="{{value}}"></paper-input>
           </div>
+          <div>
+            <paper-date-picker-dialog id="expenseDate" value="{{newExpenseDate}}" infiniteScrolling="false"></paper-date-picker-dialog>
+            <label>Date</label>
+            <paper-button on-click="{{openExpenseDatePicker}}" >{{formatDate(newExpenseDate)}}</paper-button>
+          </div>
           <paper-button dismissive>Cancel</paper-button>
           <paper-button affirmative on-click="{{addExpense}}">Add</paper-button>
         </paper-action-dialog>
@@ -80,6 +85,7 @@
       dailyBudget: 0.0,
       from: new Date(),
       to: moment().add(7, 'days').toDate(),
+      newExpenseDate: new Date(),
       expenses: [{name: "food", price: "30.5", timestamp: moment().format("DD MMM YYYY h:mm")}],
       toggleDrawer: function() {
         this.$.drawerPanel.togglePanel();
@@ -90,7 +96,11 @@
       openFinalDatePicker: function() {
         this.$.finalDate.open();
       },
+      openExpenseDatePicker: function() {
+        this.$.expenseDate.open();
+      },
       newExpense: function() {
+        this.newExpenseDate = new Date();
         this.$.newExpenseDialog.toggle();
       },
       formatDate: function(date) {
@@ -113,7 +123,7 @@
         this.expenses.unshift({
           name: this.name,
           price: Number(this.value).toFixed(2),
-          timestamp: moment().format("DD MMM YYYY h:mm")
+          timestamp: this.formatDate(this.newExpenseDate)
         });
         this.name = "";
         this.value = "";
