@@ -1,0 +1,25 @@
+<link rel="import" href="bower_components/paper-shadow/paper-shadow.html">
+
+<polymer-element name="expense-list" attributes="expenses">
+  <template>
+   <link rel="stylesheet" href="expense-list.css">
+
+    <template repeat="{{expenses}}">
+      <paper-shadow z="1">
+        <div class="expense" flex horizontal center layout>
+          <div flex vertical layout>
+            <div id="expense-name">{{name}}</div>
+            <div id="expense-timestamp">{{timestamp}}</div>
+          </div>
+          <div id="expense-price">${{price}}</div>
+        </div>
+      </paper-shadow>
+    </template>
+
+  </template>
+  <script>
+    Polymer('expense-list', {
+      expenses: []
+    });
+  </script>
+</polymer-element>
