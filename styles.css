@@ -11,12 +11,6 @@ core-overlay-layer {
   background-color: #66aa55;
   color: #fff;
 }
-[drawer] > core-item {
-  padding: 1em;
-}
-core-item.paper-input {
-  width: 95%;
-}
 [main] > div {
   padding: 2em;
 }
@@ -34,15 +28,6 @@ paper-fab {
   position: absolute !important;
   right: 1em;
   z-index: 10;
-}
-.hidden {
-   visibility: hidden;
-}
-.errorLabel {
-   visibility: visible;
-   font-size: 0.6em;
-   color: #ff0000;
-   vertical-align: bottom;
 }
 .smallFont {
   font-size: 0.6em;

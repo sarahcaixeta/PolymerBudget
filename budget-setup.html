@@ -1,0 +1,50 @@
+<link rel="import" href="bower_components/core-item/core-item.html">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-date-picker/paper-date-picker-dialog.html">
+<link rel="import" href="expense-list.html">
+
+<polymer-element name="budget-setup" attributes="budget from to">
+  <template>
+   <link rel="stylesheet" href="budget-setup.css">
+
+    <core-item>
+      <paper-input label="Budget"
+        value="{{budget}}"
+        floatingLabel></paper-input>
+    </core-item>
+    <core-item>
+      <paper-date-picker-dialog id="initialDate" value="{{from}}" infiniteScrolling="false"></paper-date-picker-dialog>
+      <label>From</label>
+      <paper-button on-click="{{openInitialDatePicker}}" >{{formatDate(from)}}</paper-button>
+    </core-item>
+    <core-item>
+      <paper-date-picker-dialog id="finalDate" value="{{to}}" infiniteScrolling="false"></paper-date-picker-dialog>
+      <label>To</label>
+      <paper-button on-click="{{openFinalDatePicker}}" >{{formatDate(to)}}</paper-button>
+    </core-item>
+      <label id="dateValidation" class='hidden'>The initial date should be before final date.</label>
+
+  </template>
+  <script>
+    Polymer('budget-setup', {
+      budget: null,
+      from: new Date(),
+      to: moment().add(7, 'days').toDate(),
+      openInitialDatePicker: function() {
+        this.$.initialDate.open();
+      },
+      openFinalDatePicker: function() {
+        this.$.finalDate.open();
+      },
+      formatDate: function(date) {
+        return date.toDateString();
+      },
+      fromChanged: function() {
+        this.$.dateValidation.className = classAccordingToValidation(this.from, this.to);
+      },
+      toChanged: function() {
+       this.$.dateValidation.className = classAccordingToValidation(this.from, this.to);
+      },
+    });
+  </script>
+</polymer-element>

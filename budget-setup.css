@@ -1,0 +1,15 @@
+core-item {
+  padding: 1em;
+}
+core-item.paper-input {
+  width: 95%;
+}
+.hidden {
+   visibility: hidden;
+}
+.errorLabel {
+   visibility: visible;
+   font-size: 0.6em;
+   color: #ff0000;
+   vertical-align: bottom;
+}

@@ -9,6 +9,7 @@
 <link rel="import" href="bower_components/paper-shadow/paper-shadow.html">
 <link rel="import" href="bower_components/paper-dialog/paper-action-dialog.html">
 <link rel="import" href="expense-list.html">
+<link rel="import" href="budget-setup.html">
 
 <polymer-element name="app-a">
   <template>
@@ -18,23 +19,8 @@
 
       <core-header-panel drawer>
         <core-toolbar>Menu</core-toolbar>
-        <core-item>
-          <paper-input label="Budget"
-          value="{{budget}}"
-          on-change="{{calculate}}"
-          floatingLabel></paper-input>
-        </core-item>
-        <core-item>
-          <paper-date-picker-dialog id="initialDate" value="{{from}}" infiniteScrolling="false"></paper-date-picker-dialog>
-          <label>From</label>
-          <paper-button on-click="{{openInitialDatePicker}}" >{{formatDate(from)}}</paper-button>
-        </core-item>
-        <core-item>
-          <paper-date-picker-dialog id="finalDate" value="{{to}}" infiniteScrolling="false"></paper-date-picker-dialog>
-          <label>To</label>
-          <paper-button on-click="{{openFinalDatePicker}}" >{{formatDate(to)}}</paper-button>
-        </core-item>
-          <label id="dateValidation" class='hidden'>The initial date should be before final date.</label>
+
+        <budget-setup from="{{initialDate}}" to="{{finalDate}}" budget="{{budget}}"></budget-setup>
       </core-header-panel>
 
       <core-header-panel main>
@@ -74,18 +60,10 @@
   <script>
     Polymer('app-a', {
       dailyBudget: 0.0,
-      from: new Date(),
-      to: moment().add(7, 'days').toDate(),
       newExpenseDate: new Date(),
       expenses: [{name: "food", price: "40.5", timestamp: moment().format("MMM DD YYYY")}],
       toggleDrawer: function() {
         this.$.drawerPanel.togglePanel();
-      },
-      openInitialDatePicker: function() {
-        this.$.initialDate.open();
-      },
-      openFinalDatePicker: function() {
-        this.$.finalDate.open();
       },
       openExpenseDatePicker: function() {
         this.$.expenseDate.open();
@@ -96,18 +74,17 @@
       formatDate: function(date) {
         return date.toDateString();
       },
-      fromChanged: function() {
-        this.$.dateValidation.className = classAccordingToValidation(this.from, this.to);
+      initialDateChanged: function() {
         this.calculate();
       },
-      toChanged: function() {
-       this.$.dateValidation.className = classAccordingToValidation(this.from, this.to);
-       this.calculate();
+      finalDateChanged: function() {
+        this.calculate();
+      },
+      budgetChanged: function() {
+        this.calculate();
       },
       calculate: function() {
-        if (this.$.dateValidation.className == 'hidden'){
-          this.dailyBudget = calculateDailyBudget(this.from, this.to, this.budget, this.expenses);
-        }
+        this.dailyBudget = calculateDailyBudget(this.initialDate, this.finalDate, this.budget, this.expenses);
       },
       addExpense: function() {
         this.expenses.unshift({
@@ -118,7 +95,7 @@
         this.name = "";
         this.value = "";
         this.newExpenseDate = new Date();
-        this.dailyBudget = calculateDailyBudget(this.from, this.to, this.budget, this.expenses);
+        this.dailyBudget = calculateDailyBudget(this.initialDate, this.finalDate, this.budget, this.expenses);
       }
 
     });
