@@ -1,6 +1,7 @@
-.dialog {
+.card {
+  background: white;
+  margin: 1em;
   padding: 1em;
-  background-color: white;
 }
 paper-input {
   margin-left: 0.4em;
