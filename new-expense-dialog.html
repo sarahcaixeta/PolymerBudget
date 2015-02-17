@@ -8,19 +8,19 @@
   <template>
     <link rel="stylesheet" href="new-expense-dialog.css">
 
-    <paper-shadow z="2" class="card" animated>
-      <div>
+    <paper-shadow z="2" class="shadow">
+      <div class="card">
         <div>
           <label>Name</label>
-          <paper-input-decorator id="nameDecorator" error="Name must start with a letter" autovalidate>
-            <input id="expenseName" is="core-input" label="Food, drinks" value="{{name}}" pattern="^[a-zA-Z].*" >
+          <paper-input-decorator id="nameDecorator" label="food, drinks" error="Name must start with a letter" autovalidate>
+            <input id="expenseName" is="core-input"  value="{{name}}" pattern="^[a-zA-Z].*" >
           </paper-input-decorator>
         </div>
 
         <div>
           <label>Price</label>
-          <paper-input-decorator id="priceDecorator" error="Only numbers accepted" autovalidate>
-            <input id="expensePrice" is="core-input" label="10.00" value="{{price}}" pattern="^[0-9].*" >
+          <paper-input-decorator id="priceDecorator" label="10.00" error="Only numbers accepted" autovalidate>
+            <input id="expensePrice" is="core-input" value="{{price}}" pattern="^[0-9].*" >
           </paper-input-decorator>
         </div>
 
@@ -30,13 +30,12 @@
           <paper-button on-click="{{openExpenseDatePicker}}" >{{formatDate(newExpenseDate)}}</paper-button>
         </div>
 
-        <div id="actions" relative layout horizontal>
+        <div class="action-panel" relative layout horizontal> <!--TODO move this div to the bottom -->
           <paper-button on-click="{{close}}">Cancel</paper-button>
           <div flex></div>
           <paper-button on-click="{{createExpense}}">Add</paper-button>
         </div>
-
-      </div>
+      <div>
     </paper-shadow>
 
   </template>

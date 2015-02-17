@@ -1,8 +1,16 @@
-.card {
+.shadow {
   background: white;
   margin: 1em;
+}
+.card {
+  width: 80vw;
+  height: 80vh;
   padding: 1em;
 }
 paper-input {
   margin-left: 0.4em;
+}
+.action-panel {
+  padding: 1em;
+
 }
