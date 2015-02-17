@@ -1,11 +1,10 @@
+<link rel="import" href="bower_components/paper-input/paper-input-decorator.html">
 <link rel="import" href="bower_components/paper-input/paper-input.html">
 <link rel="import" href="bower_components/paper-date-picker/paper-date-picker-dialog.html">
 <link rel="import" href="bower_components/paper-shadow/paper-shadow.html">
 <link rel="import" href="bower_components/core-overlay/core-overlay.html">
-<link rel="import" href="bower_components/core-transition/core-transition-css.html">
 
-
-<polymer-element name="new-expense-dialog" extends="core-overlay" role="dialog" >
+<polymer-element name="new-expense-dialog" extends="core-overlay" >
   <template>
     <link rel="stylesheet" href="new-expense-dialog.css">
 
@@ -13,12 +12,16 @@
       <div>
         <div>
           <label>Name</label>
-          <paper-input label="Food, drinks" value="{{name}}"></paper-input>
+          <paper-input-decorator id="nameDecorator" error="Name must start with a letter" autovalidate>
+            <input id="expenseName" is="core-input" label="Food, drinks" value="{{name}}" pattern="^[a-zA-Z].*" >
+          </paper-input-decorator>
         </div>
 
         <div>
-          <label>Amount</label>
-          <paper-input label="10.00" value="{{value}}"></paper-input>
+          <label>Price</label>
+          <paper-input-decorator id="priceDecorator" error="Only numbers accepted" autovalidate>
+            <input id="expensePrice" is="core-input" label="10.00" value="{{price}}" pattern="^[0-9].*" >
+          </paper-input-decorator>
         </div>
 
         <div>
@@ -39,7 +42,8 @@
   </template>
   <script>
     Polymer('new-expense-dialog', {
-      open: false,
+      name: "",
+      price: "",
       newExpenseDate: new Date(),
       openExpenseDatePicker: function() {
         this.$.expenseDate.open();
@@ -48,16 +52,21 @@
         return date.toDateString();
       },
       createExpense: function(){
-        var expense = { name: this.name,
-          price: Number(this.value).toFixed(2),
-          timestamp: this.formatDate(this.newExpenseDate)};
-        this.fire('created-expense', expense);
-        this.name = "";
-        this.value = "";
-        this.newExpenseDate = new Date();
-        this.close();
-      }
+        if (this.validateFields()){
+          var expense = { name: this.name,
+            price: Number(this.price).toFixed(2),
+            timestamp: this.formatDate(this.newExpenseDate)};
+          this.fire('created-expense', expense);
+          this.name = "";
+          this.price = "";
+          this.newExpenseDate = new Date();
+          this.close();
 
+        }
+      },
+      validateFields: function() {
+        return this.name.length > 0  && this.price.length > 0 && this.$.expenseName.validity.valid && this.$.expensePrice.validity.valid;
+      }
 
     });
   </script>
