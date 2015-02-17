@@ -1,31 +1,41 @@
 <link rel="import" href="bower_components/paper-input/paper-input.html">
 <link rel="import" href="bower_components/paper-date-picker/paper-date-picker-dialog.html">
-<link rel="import" href="bower_components/paper-dialog/paper-action-dialog.html">
+<link rel="import" href="bower_components/paper-dialog/paper-dialog-base.html">
 <link rel="import" href="bower_components/paper-shadow/paper-shadow.html">
 
 
-<polymer-element name="new-expense-dialog" extends="paper-action-dialog" attri>
+<polymer-element name="new-expense-dialog" extends="paper-dialog-base" attri>
   <template>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="new-expense-dialog.css">
+
     <paper-shadow z="1">
-      <div>
+      <div class="dialog">
+
         <div>
           <label>Name</label>
           <paper-input label="Food, drinks" value="{{name}}"></paper-input>
         </div>
+
         <div>
           <label>Amount</label>
           <paper-input label="10.00" value="{{value}}"></paper-input>
         </div>
+
         <div>
           <paper-date-picker-dialog id="expenseDate" value="{{newExpenseDate}}" infiniteScrolling="false"></paper-date-picker-dialog>
           <label>Date</label>
           <paper-button on-click="{{openExpenseDatePicker}}" >{{formatDate(newExpenseDate)}}</paper-button>
         </div>
-        <paper-button on-click="{{close}}">Cancel</paper-button>
-        <paper-button on-click="{{createExpense}}">Add</paper-button>
+
+        <div id="actions" relative layout horizontal>
+          <paper-button on-click="{{close}}">Cancel</paper-button>
+          <div flex></div>
+          <paper-button on-click="{{createExpense}}">Add</paper-button>
+        </div>
+
       </div>
     </paper-shadow>
+
   </template>
   <script>
     Polymer('new-expense-dialog', {
