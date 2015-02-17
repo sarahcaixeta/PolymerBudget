@@ -1,0 +1,54 @@
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-date-picker/paper-date-picker-dialog.html">
+<link rel="import" href="bower_components/paper-dialog/paper-action-dialog.html">
+<link rel="import" href="bower_components/paper-shadow/paper-shadow.html">
+
+
+<polymer-element name="new-expense-dialog" extends="paper-action-dialog" attri>
+  <template>
+    <link rel="stylesheet" href="styles.css">
+    <paper-shadow z="1">
+      <div>
+        <div>
+          <label>Name</label>
+          <paper-input label="Food, drinks" value="{{name}}"></paper-input>
+        </div>
+        <div>
+          <label>Amount</label>
+          <paper-input label="10.00" value="{{value}}"></paper-input>
+        </div>
+        <div>
+          <paper-date-picker-dialog id="expenseDate" value="{{newExpenseDate}}" infiniteScrolling="false"></paper-date-picker-dialog>
+          <label>Date</label>
+          <paper-button on-click="{{openExpenseDatePicker}}" >{{formatDate(newExpenseDate)}}</paper-button>
+        </div>
+        <paper-button on-click="{{close}}">Cancel</paper-button>
+        <paper-button on-click="{{createExpense}}">Add</paper-button>
+      </div>
+    </paper-shadow>
+  </template>
+  <script>
+    Polymer('new-expense-dialog', {
+      open: false,
+      newExpenseDate: new Date(),
+      openExpenseDatePicker: function() {
+        this.$.expenseDate.open();
+      },
+      formatDate: function(date) {
+        return date.toDateString();
+      },
+      createExpense: function(){
+        var expense = { name: this.name,
+          price: Number(this.value).toFixed(2),
+          timestamp: this.formatDate(this.newExpenseDate)};
+        this.fire('created-expense', expense);
+        this.name = "";
+        this.value = "";
+        this.newExpenseDate = new Date();
+        this.close();
+      }
+
+
+    });
+  </script>
+</polymer-element>

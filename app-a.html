@@ -9,6 +9,7 @@
 <link rel="import" href="bower_components/paper-dialog/paper-action-dialog.html">
 <link rel="import" href="expense-list.html">
 <link rel="import" href="budget-setup.html">
+<link rel="import" href="new-expense-dialog.html">
 
 <polymer-element name="app-a">
   <template>
@@ -21,7 +22,7 @@
         <core-toolbar>Menu</core-toolbar>
 
         <budget-setup from="{{initialDate}}" to="{{finalDate}}" budget="{{budget}}"></budget-setup>
-        
+
       </core-header-panel>
 
       <core-header-panel main>
@@ -36,23 +37,8 @@
           <expense-list expenses={{expenses}}></expense-list>
         </div>
 
-        <paper-action-dialog id="newExpenseDialog">
-          <div>
-            <label>Name</label>
-            <paper-input label="Food, drinks" value="{{name}}"></paper-input>
-          </div>
-          <div>
-            <label>Amount</label>
-            <paper-input label="10.00" value="{{value}}"></paper-input>
-          </div>
-          <div>
-            <paper-date-picker-dialog id="expenseDate" value="{{newExpenseDate}}" infiniteScrolling="false"></paper-date-picker-dialog>
-            <label>Date</label>
-            <paper-button on-click="{{openExpenseDatePicker}}" >{{formatDate(newExpenseDate)}}</paper-button>
-          </div>
-          <paper-button dismissive>Cancel</paper-button>
-          <paper-button affirmative on-click="{{addExpense}}">Add</paper-button>
-        </paper-action-dialog>
+        <new-expense-dialog id="newexpensedialog" on-created-expense={{add}}></new-expense-dialog>
+
         <paper-fab icon="icons:add" on-click="{{newExpense}}"></paper-fab>
       </core-header-panel>
 
@@ -71,7 +57,7 @@
         this.$.expenseDate.open();
       },
       newExpense: function() {
-        this.$.newExpenseDialog.toggle();
+        this.$.newexpensedialog.toggle();
       },
       formatDate: function(date) {
         return date.toDateString();
@@ -88,15 +74,8 @@
       calculate: function() {
         this.dailyBudget = calculateDailyBudget(this.initialDate, this.finalDate, this.budget, this.expenses);
       },
-      addExpense: function() {
-        this.expenses.unshift({
-          name: this.name,
-          price: Number(this.value).toFixed(2),
-          timestamp: this.formatDate(this.newExpenseDate)
-        });
-        this.name = "";
-        this.value = "";
-        this.newExpenseDate = new Date();
+      add: function(event) {
+        this.expenses.unshift(event.detail);
         this.dailyBudget = calculateDailyBudget(this.initialDate, this.finalDate, this.budget, this.expenses);
       }
 
